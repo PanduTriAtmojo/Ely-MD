@@ -11,7 +11,7 @@ let handler = async (m, { conn, usedPrefix, command, text, isBotAdmin }) => {
 	let txt = `*LIST GROUP : ${groups.length}*`
 	for (let x of groups) {
 		try {
-			timer = (dt[x].joindate + dt[x].joincd) - new Date()
+			timer = (dt[x].expired + dt[x].joincd) - new Date()
 			txt += `\n\n*Group : ${gc[x].subject}*
 *id :* ${gc[x].id}
 *Members :* ${gc[x].participants.length}
@@ -23,7 +23,7 @@ let handler = async (m, { conn, usedPrefix, command, text, isBotAdmin }) => {
 *Send Messages :* ${gc[x].announce ? 'Only Admins' : 'All Participants'}
 *Durasi :* ${timer <= 0 ? 'Tanpa Batas Waktu' : `${timer.toTimeString()}`}
 ───────────────────`
-		} catch (e) {console.log(e) }
+		} catch (e) { console.log(e) }
 	}
 	await m.reply(txt)
 }
