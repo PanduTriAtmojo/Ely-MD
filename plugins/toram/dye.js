@@ -34,8 +34,8 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
 
 }
 
-handler.help = ['dye']
-handler.tags = ['toram']
+handler.menutoram = ['dye']
+handler.tagstoram = ['toram']
 handler.command = /^(dye|listdye)$/i
 
 export default handler

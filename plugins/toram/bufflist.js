@@ -204,8 +204,8 @@ Menu=>Terminal=>Kamar=>Terbaru/kamar Teman=>Klick Cari Alamat=>Pilih Masuk Denga
 ╚═══════╝`, m)
 }
 
-handler.help = ['bufflist toram']
-handler.tags = ['toram']
+handler.menutoram = ['bufflist toram']
+handler.tagstoram = ['toram']
 handler.command = /^(buff|bufflist)$/i
 
 export default handler

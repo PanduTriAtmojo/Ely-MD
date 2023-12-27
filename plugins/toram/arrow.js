@@ -135,8 +135,8 @@ let handler = async (m, {conn, usedPrefix, command, text}) => {
 `)
 }
 
-handler.tags = ['toram']
-handler.help = ['arrow']
+handler.tagstoram = ['toram']
+handler.menutoram = ['arrow']
 handler.command = /^(arrow|panah)$/i
 
 export default handler

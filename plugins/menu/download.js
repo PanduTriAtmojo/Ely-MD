@@ -18,7 +18,7 @@ footer: '╰────\n',
 }
 let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
 	try {
-		let nais = 'https://i.ibb.co/Cnr25XH/zero.jpg'
+		let nais = await (await fetch('https://raw.githubusercontent.com/clicknetcafe/Databasee/main/azamibot/menus.json')).json().then(v => v.getRandom())
 		let _package = JSON.parse(await promises.readFile(join(__dirname, '../package.json')).catch(_ => ({}))) || {}
 		let menudownload = Object.values(plugins).filter(plugin => !plugin.disabled).map(plugin => {
 			return {

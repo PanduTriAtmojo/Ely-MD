@@ -13,7 +13,6 @@ let tags = {
 	'primbon': '🎆 *PRIMBON*',
 	'creator': '🖱💻 *CREATOR*',
 	'tools': '✏️ *TOOLS MENU*',
-	'toram' : '*TORAM*'
 }
 const defaultMenu = {
 	before: `

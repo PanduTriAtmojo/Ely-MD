@@ -25,7 +25,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
                   drop: $(this).find(`.monster-drop > div > a`).text().trim()
               }
           })
-              let db = `*detail ${command + text}:*\n\n`
+              let db = `*detail monster ${text}:*\n\n`
               for (let i = 0; i < array.length; i++) {
                 db += `-----------------------------------\nBoss: ${array[i].boss}\nDiff: ${array[i].diff}\nLevel: ${array[i].lv}\nHP: ${array[i].hp}\nEXP: ${array[i].exp}\nElement: ${array[i].element}\nTamable: ${array[i].tamable}\nLocation: ${array[i].map}\nDrop: ${array[i].drop}\n`
               }
@@ -38,10 +38,8 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     }
 }
 
-handler.help = ['mons <text>']
-handler.tags = ['toram']
+handler.menutoram = ['mons <text>']
+handler.tagstoram = ['toram']
 handler.command = /^(mons|mosnter)$/i
-
-handler.premium = true
 
 export default handler

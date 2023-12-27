@@ -188,8 +188,8 @@ let handler = async (m, {conn, usedPrefix, command, text}) => {
     }
 }
 
-handler.tags = ['toram']
-handler.help = ['farming']
+handler.tagstoram = ['toram']
+handler.menutoram = ['farming']
 handler.command = /^(farm|farming)$/i
 
 export default handler

@@ -168,8 +168,8 @@ let handler = async (m, {conn, usedPrefix, }) => {
     )
 }
 
-handler.tags = ['toram']
-handler.menu = ['ailmemt']
+handler.tagstoram = ['toram']
+handler.menutoram = ['ailment']
 handler.command = /^(ail(ment)|status(buruk))$/i
 
 export default handler

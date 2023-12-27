@@ -34,8 +34,8 @@ let handler = async (m, { conn, usedPrefix, command, text}) => {
    }
 }
 
-handler.help = ['leveling <level|bonusExp>']
-handler.tags = ['toram']
+handler.menutoram = ['leveling <level|bonusExp>']
+handler.tagstoram = ['toram']
 handler.command = /^(leveling|lvlng)$/i
 
 export default handler
