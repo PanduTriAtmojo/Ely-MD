@@ -10,61 +10,34 @@ let headers = {
 };
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-    if (!text) throw `Lah level lu berapa cok`
     try {
-        const url = `https://toram-id.info/leveling?level=${text}&bonusexp=&range=8`;
-
-        const response = await fetch(url, { headers });
-
-        if (response.ok) {
-            const htmlData = await response.text();
-            const $ = cheerio.load(htmlData);
-
-            const monsters = [];
-
-            $('table.table-hover').each((index, element) => {
-                const monsterInfo = $(element).find('td').map((i, td) => $(td).text().trim()).get();
-                if (monsterInfo[1] && monsterInfo[1] !== 'N/A') {
-                    const monster = {
-                        note: monsterInfo[0],
-                        spots: [],
-                    };
-
-                    for (let i = 2; i < monsterInfo.length; i++) {
-                        monster.spots.push(monsterInfo[i]);
-                    }
-
-                    monsters.push(monster);
-                }
-            })
-
-
-            const currentLevel = parseInt(text) || 0;
-            const nextLevel = currentLevel + 1;
-
-
-            const formattedText = `*List Leveling*\nlevel: ${currentLevel}-${nextLevel}\n\n` + monsters.map((monster, index) => {
-                const formatSpot = (spots) => {
-                    return spots.map(spot => {
-                        const lines = spot.split('\n').map(line => line.trim());
-                        const monsterDetails = lines[0] || 'N/A';
-                        const mapDetails = lines[3] ? lines[3] : 'N/A';
-                        const xpDetails = lines[7] ? lines[7] : 'N/A';
-                        return `Monster : *${monsterDetails}*\nMap : *${mapDetails}*\nXP  : *${xpDetails}*\n __________`;
-                    }).join('\n\n');
-                };
-
-                return formatSpot(monster.spots) + '\n';
-            }).join('\n\n');
-
-            await m.reply(formattedText);
-        } else {
-            console.error('Failed to fetch data. Status code: ' + response.status);
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        throw 'Server down / Level ketinggian'
-    }
+        let [lvl, bexp] = text.split(/[^\w\s]/g)
+        if (!(lvl && bexp)) throw `Contoh: ${usedPrefix + command} 190|50`
+   axios.get(`https://toram-id.info/leveling?level=${lvl}&bonusexp=${bexp}&range=5`)
+ .then((response) => {
+   if (response.status === 200) {
+     const html = response.data;
+     const $ = cheerio.load(html);
+     const array = []
+     $('tr.text-danger').each(function(i, elem) {
+       array[i] = {
+         boss: $(this).find('.px-2 > div').text().trim(),
+         location: $(this).find('.text-muted > a').text().trim(),
+         exp: $(this).find('.text-primary').text().trim()
+       }
+     });
+     let gb = `*Leveling lvl ${lvl} & bonus exp ${bexp}*\n`
+     for(let i = 0; i < array.length; i++) {
+         gb += `_______________________________\nBoss: ${array[i].boss}\nLocation: ${array[i].location}\nEXP: ${array[i].exp}\n`
+     }
+     client.sendText(from, gb, mek)
+     console.log(array[0])
+   }
+ })
+   } catch (err) {
+     console.log(err)
+     m.reply(lang.eror(err))
+   }
 }
 
 handler.help = ['leveling <level>']
