@@ -1,24 +1,19 @@
-import fetch from 'node-fetch';
-import cheerio from 'cheerio';
+import axios from 'axios'
+import cheerio from 'cheerio'
 
-const token = '62|Iviz9iHAU31BWGucKDV91okCVJb64KS0WEdEdZy0';
-
-let headers = {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-    Authorization: 'Bearer ' + token,
-};
-
-let handler = async (m, { conn, text, usedPrefix, command }) => {
+let handler = async (m, { conn, usedPrefix, command, text}) => {
+    let [lvl, bexp] = text.split(/[^\w\s]/g)
+    if (!(lvl && bexp)) throw `Contoh: ${usedPrefix}${command} 190|50`
     try {
-        let [lvl, bexp] = text.split(/[^\w\s]/g)
-        if (!(lvl && bexp)) throw `Contoh: ${usedPrefix + command} 190|50`
+        // if( isNaN(lvl)) return m.reply('NaN')
+        //     if( isNaN(bexp)) return m.reply('NaN')
+
    axios.get(`https://toram-id.info/leveling?level=${lvl}&bonusexp=${bexp}&range=5`)
  .then((response) => {
    if (response.status === 200) {
      const html = response.data;
      const $ = cheerio.load(html);
-     const array = []
+     let array = []
      $('tr.text-danger').each(function(i, elem) {
        array[i] = {
          boss: $(this).find('.px-2 > div').text().trim(),
@@ -30,22 +25,18 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
      for(let i = 0; i < array.length; i++) {
          gb += `_______________________________\nBoss: ${array[i].boss}\nLocation: ${array[i].location}\nEXP: ${array[i].exp}\n`
      }
-     client.sendText(from, gb, mek)
-     console.log(array[0])
+     m.reply(gb)
+    console.log(array[0])
    }
  })
-   } catch (err) {
-     console.log(err)
-     m.reply(lang.eror(err))
+   } catch (e) {
+     m.reply('Server Down')
    }
 }
 
-handler.help = ['leveling <level>']
+handler.help = ['leveling <level|bonusExp>']
 handler.tags = ['toram']
 handler.command = /^(leveling|lvlng)$/i
 
-handler.premium = true
-handler.limit = false
-
-export default handler;
+export default handler
 
