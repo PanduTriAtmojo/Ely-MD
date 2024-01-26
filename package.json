@@ -10,7 +10,7 @@
 		"plugins": "plugins"
 	},
 	"scripts": {
-		"start": "node index.js",
+		"start": "node .",
 		"install": "npm install cfonts",
 		"test": "node test.js",
 		"test2": "nodemon index.js"

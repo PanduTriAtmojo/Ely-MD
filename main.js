@@ -24,6 +24,7 @@ import {
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const require = createRequire(__dirname) // Bring in the ability to create the 'require' method
 const args = [join(__dirname, 'main.js'), ...process.argv.slice(2)]
+const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
 const { say } = cfonts
 const { name, author } = require(join(__dirname, './package.json')) // https://www.stefanjudis.com/snippets/how-to-import-json-files-in-es-modules-node-js/
 
@@ -84,6 +85,7 @@ if (!opts['test']) {
 		Connection.store.writeToFile(Connection.storeFile)
 	}, 1000 * 60 * 5) // save every 5 minute
 }
+if (opts['server']) (await import('./server.js')).default(conn, PORT)
 
 
 // Quick Test
