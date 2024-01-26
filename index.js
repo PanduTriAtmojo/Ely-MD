@@ -9,7 +9,7 @@ import { createInterface } from 'readline';
 const rl = createInterface(process.stdin, process.stdout);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const args = [join(__dirname, 'main.js'), ...process.argv.slice(2)];
-const port = 8000; // Define the port for your HTTP server
+const port = 3000; // Define the port for your HTTP server
 
 const app = express();
 
