@@ -11,7 +11,6 @@
 	},
 	"scripts": {
 		"start": "node .",
-		"install": "npm install cfonts",
 		"test": "node test.js",
 		"test2": "nodemon index.js"
 	},
@@ -39,26 +38,21 @@
 		"url": "https://github.com/clicknetcafe/azamibot-md-multi/issues"
 	},
 	"license": "GPL-3.0-or-later",
-	"devDependencies": {
+	"dependencies": {
 		"@bochilteam/scraper": "^4.2.4",
 		"@whiskeysockets/baileys": "^6.6.0",
 		"awesome-phonenumber": "^6.1.0",
 		"axios": "^1.5.1",
-		"brainly-scraper-v2": "^2.2.8",
 		"cfonts": "^3.2.0",
 		"chalk": "^5.3.0",
 		"cheerio": "^1.0.0-rc.12",
 		"emoji-api": "^3.0.1",
 		"file-type": "^18.5.0",
-		"fluent-ffmpeg": "^2.1.2",
 		"formdata-node": "^6.0.3",
-		"genshin-db": "^4.3.16",
-		"google-it": "^1.6.4",
 		"got": "^13.0.0",
 		"human-readable": "^0.2.1",
 		"jsdom": "^22.1.0",
 		"lodash": "^4.17.21",
-		"lowdb": "^5.1.0",
 		"mongoose": "^8.0.1",
 		"node-gtts": "^2.0.2",
 		"node-webpmux": "^3.1.9",
@@ -72,7 +66,13 @@
 		"tesseract.js": "^5.0.2",
 		"url-regex-safe": "^4.0.0",
 		"wa-sticker-formatter": "^4.4.4",
-		"yargs": "^17.7.2",
+		"yargs": "^17.7.2"
+	},
+	"devDependencies": {
+		"brainly-scraper-v2": "^2.2.8",
+		"fluent-ffmpeg": "^2.1.2",
+		"google-it": "^1.6.4",
+		"lowdb": "^5.1.0",
 		"yt-search": "^2.10.4",
 		"ytdl-core": "^4.11.5"
 	}
