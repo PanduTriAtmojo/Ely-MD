@@ -1,4 +1,4 @@
-import http from 'http';
+import express from 'express';
 import Helper from './lib/helper.js';
 import { fileURLToPath } from 'url';
 import { join, dirname } from 'path';
@@ -10,6 +10,8 @@ const rl = createInterface(process.stdin, process.stdout);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const args = [join(__dirname, 'main.js'), ...process.argv.slice(2)];
 const port = 8000; // Define the port for your HTTP server
+
+const app = express();
 
 var isRunning = false;
 
@@ -51,13 +53,12 @@ function start(file) {
         }
     }
 
-    // HTTP server to display content
-    const server = http.createServer((req, res) => {
-        res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.end('Hello, World!\n');
+    // Route to display content
+    app.get('/', (req, res) => {
+        res.send('Hello, World!');
     });
 
-    server.listen(port, () => {
+    app.listen(port, () => {
         console.log(`Server running at http://localhost:${port}/`);
     });
 }
