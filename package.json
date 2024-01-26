@@ -11,7 +11,7 @@
 	},
 	"scripts": {
 		"start": "node main.js",
-		"install": "npm install --force",
+		"install": "--force",
 		"test": "node test.js",
 		"test2": "nodemon index.js"
 	},
