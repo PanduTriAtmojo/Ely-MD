@@ -2,6 +2,7 @@ import ytdl from 'ytdl-core'
 import yts from 'yt-search'
 import { youtubeSearch, youtubedl } from '@bochilteam/scraper-sosmed'
 import { somematch, isUrl, niceBytes } from '../../lib/func.js'
+import fetch from 'node-fetch'
 
 let handler = async (m, { conn, text, args, usedPrefix, command }) => {
 	if (!text) throw `Example: ${usedPrefix + command} Sia Unstopable`
@@ -83,13 +84,19 @@ let handler = async (m, { conn, text, args, usedPrefix, command }) => {
 			await conn.sendMsg(m.chat, { audio: { url: anu.url }, mimetype: 'audio/mpeg' }, { quoted : m })
 		} catch (e) {
 			console.log(e)
-			m.reply(e)
+			try {
+				let anu = await( await fetch(`https://api.lolhuman.xyz/api/ytaudio2?apikey=${api.lol}&url=${url}`)).json()
+				await conn.sendMsg(m.chat, { audio: { url: anu.result.link }, mimetype: 'audio/mpeg' }, { quoted : m })
+			} catch (e) {
+				console.log(e)
+				m.reply(e)
+			}
 		}
 	}
 }
 
-handler.menudownload = ['ytplay <teks> / <url>']
-handler.tagsdownload = ['search']
+// handler.menudownload = ['ytplay <teks> / <url>']
+// handler.tagsdownload = ['search']
 handler.command = /^(play|(play)?yt(play|dl)?)$/i
 
 export default handler

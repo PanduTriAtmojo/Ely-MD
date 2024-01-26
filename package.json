@@ -10,8 +10,7 @@
 		"plugins": "plugins"
 	},
 	"scripts": {
-		"start": "pm2 start index.js",
-		"postinstall": "npm i -g pm2",
+		"start": "node .",
 		"test": "node test.js",
 		"test2": "nodemon index.js"
 	},
@@ -66,9 +65,7 @@
 		"terminal-image": "^2.0.0",
 		"url-regex-safe": "^4.0.0",
 		"wa-sticker-formatter": "^4.4.4",
-		"yargs": "^17.7.2"
-	},
-	"devDependencies": {
+		"yargs": "^17.7.2",
 		"brainly-scraper-v2": "^2.2.8",
 		"cheerio": "^1.0.0-rc.12",
 		"fluent-ffmpeg": "^2.1.2",

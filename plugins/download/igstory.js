@@ -1,11 +1,11 @@
-import fetch from 'node-fetch'
+import fetch from "node-fetch"
 
 let handler = async (m, {conn, usedPrefix, command, text}) => {
-    if (!text) throw `Linknya?\nExmple: *${usedPrefix}${command} https://vt.tiktok.com/ZSwWCk5o/*`
-    m.reply(wait)
+    if(!text) throw `Masukkan usernamenya`
     try {
-        let anu = await(await fetch(`https://api.lolhuman.xyz/api/tiktok2?apikey=${api.lol}&url=${text}`)).json()
-        for ( let i of anu.result ){
+        m.reply(wait)
+        let res = await( await fetch(`https://api.lolhuman.xyz/api/igstory/${text}?apikey=${api.lol}`)).json()
+        for (let i of res.result) {
             if (i.includes('.mp4') || i.includes('.mkv')) {
                 await conn.sendMsg(m.chat, { video: { url: i } }, { quoted: m })
               } else if (i.includes('.jpg') || i.includes('.png') || i.includes('.jpeg') || i.includes('.webp')) {
@@ -13,15 +13,13 @@ let handler = async (m, {conn, usedPrefix, command, text}) => {
               }
         }
     } catch (e) {
-        m.reply('invalid url / server down')
+        m.reply("Server Down / Username tidak ditemukan")
     }
-    
 }
 
-handler.menudownload = ['tiktok <url>']
+handler.menudownload = ['instastory <url>']
 handler.tagsdownload = ['search']
-handler.command = /^(tiktok|ttdl|tt|tiktokdl)$/i
-
+handler.command = /^(instastory|storyinstagram|igstory|storyig|storiinstagram|storiig|igstori)$/i
 handler.limit = true
 
 export default handler
