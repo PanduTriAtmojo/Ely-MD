@@ -71,8 +71,6 @@
 		"fluent-ffmpeg": "^2.1.2",
 		"google-it": "^1.6.4",
 		"spottydl": "^0.2.2",
-		"tesseract.js": "^5.0.2",
-		"yt-search": "^2.10.4",
-		"ytdl-core": "^4.11.5"
+		"tesseract.js": "^5.0.2"
 	}
 }
